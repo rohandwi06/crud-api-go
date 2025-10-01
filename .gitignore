@@ -1,0 +1,14 @@
+# Environment Variable
+.env
+
+# Build Artifacts
+*.exe
+CRUD-API-GO
+CRUD-API-GO.exe
+
+# Tool-made Directory
+/tmp
+
+# Log Files
+*.log
+*.log*
