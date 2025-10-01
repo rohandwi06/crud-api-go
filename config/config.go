@@ -1,6 +1,6 @@
 package config
 
-// Sebuah struct yang aka
+// Sebuah struct yang berisi struktur dari .env
 type Config struct {
 	DBHost string
 	DBPort string

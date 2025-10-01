@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Membuat struct MahasiswaController sebagai blueprint
 type MahasiswaController struct {
 	DB *gorm.DB
 }

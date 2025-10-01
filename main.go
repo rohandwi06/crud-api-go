@@ -13,6 +13,7 @@ import (
 
 func main() {
 
+	// Muat .env
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Gagal load .env :", err)
@@ -40,7 +41,7 @@ func main() {
 	r := gin.Default()
 
 	// 5. PANGGIL FUNGSI SETUP ROUTES DI SINI
-	routes.SetupRoutes(r, mahasiswaController) // <-- 2. Ganti semua r.GET, r.POST dengan ini
+	routes.SetupRoutes(r, mahasiswaController)
 
-	r.Run() // memek
+	r.Run()
 }
