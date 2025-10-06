@@ -42,6 +42,7 @@ func SeedMahasiswa(db *gorm.DB) {
 	// Data yang akan diisikan
 	mahasiswa := []model.Mahasiswa{
 		{Nama: "Rohan Dwi", Nim: "108072500017", Prodi: "S1-IF", Kelas: "IF-05-06"},
+		{Nama: "Jane Doe", Nim: "123456789101", Prodi: "S1-IF", Kelas: "IF-05-06"},
 	}
 
 	// Cek apakah data sudah ada
