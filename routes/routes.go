@@ -10,8 +10,8 @@ import (
 func SetupRoutes(router *gin.Engine, mahasiswaController *controllers.MahasiswaController) {
 	// Definisikan semua route di sini
 	router.POST("/mahasiswa", mahasiswaController.CreateMahasiswa)
-	router.GET("/mahasiswa", mahasiswaController.GetMahasiswas)
-	router.GET("/mahasiswa/:id", mahasiswaController.GetMahasiswa)
+	router.GET("/mahasiswa", mahasiswaController.GetAllMahasiswa)
+	router.GET("/mahasiswa/:id", mahasiswaController.GetMahasiswaById)
 	router.PUT("/mahasiswa/:id", mahasiswaController.UpdateMahasiswa)
 	router.DELETE("/mahasiswa/:id", mahasiswaController.DeleteMahasiswa)
 }

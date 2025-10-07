@@ -19,7 +19,7 @@ func main() {
 		log.Fatal("Gagal load .env :", err)
 	}
 
-	// 1. Muat konfigurasi
+	// Muat konfigurasi
 	cfg := config.Config{
 		DBHost: os.Getenv("DB_HOST"),
 		DBPort: os.Getenv("DB_PORT"),
@@ -28,20 +28,21 @@ func main() {
 		DBPass: os.Getenv("DB_PASS"),
 	}
 
-	// 2. Buat koneksi database
+	// Buat koneksi database
 	db, err := config.ConnectDatabase(cfg)
 	if err != nil {
 		log.Fatal("Tidak bisa konek ke database: ", err)
 	}
 
-	// 3. Buat instance controller dengan MENYUNTIKKAN 'db'
+	// Buat instance controller dengan menyuntikkan 'db'
 	mahasiswaController := controllers.NewMahasiswaController(db)
 
-	// 4. Setup router
+	// Setup router
 	r := gin.Default()
 
-	// 5. PANGGIL FUNGSI SETUP ROUTES DI SINI
+	// Panggil setiap fungsi controller
 	routes.SetupRoutes(r, mahasiswaController)
 
+	// Jalankan
 	r.Run()
 }
