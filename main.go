@@ -2,7 +2,7 @@ package main
 
 import (
 	"crud-api-go/config"
-	"crud-api-go/controllers"
+	controller "crud-api-go/controllers"
 	"crud-api-go/routes"
 	"log"
 	"os"
@@ -31,17 +31,21 @@ func main() {
 	// Buat koneksi database
 	db, err := config.ConnectDatabase(cfg)
 	if err != nil {
-		log.Fatal("Tidak bisa konek ke database: ", err)
+		log.Fatal("Gagal untuk koneksi db: ", err)
 	}
 
 	// Buat instance controller dengan menyuntikkan 'db'
-	mahasiswaController := controllers.NewMahasiswaController(db)
+	authController := controller.NewAuthController(db)
+	userController := controller.NewUserController(db)
+	mahasiswaController := controller.NewMahasiswaController(db)
 
 	// Setup router
 	r := gin.Default()
 
 	// Panggil setiap fungsi controller
-	routes.SetupRoutes(r, mahasiswaController)
+	routes.AuthRoutes(r, authController)
+	routes.UserRoutes(r, userController)
+	routes.MahasiswaRoutes(r, mahasiswaController)
 
 	// Jalankan
 	r.Run()

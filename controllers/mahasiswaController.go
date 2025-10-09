@@ -1,4 +1,4 @@
-package controllers
+package controller
 
 import (
 	models "crud-api-go/db/models"
