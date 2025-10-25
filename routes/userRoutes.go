@@ -1,14 +1,14 @@
 package routes
 
 import (
-	controller "crud-api-go/controllers"
+	handler "crud-api-go/handlers"
 	"crud-api-go/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
-func UserRoutes(r *gin.Engine, ctrl *controller.UserController) {
-	api := r.Group("/api", middleware.AuthMiddleware())
+func UserRoutes(router *gin.Engine, ctrl *handler.UserHandler) {
+	api := router.Group("/api", middleware.AuthMiddleware())
 	{
 		api.GET("/users", ctrl.GetAllUsers)
 		api.GET("/users/:id", ctrl.GetUserById)

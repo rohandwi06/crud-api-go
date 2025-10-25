@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	model "crud-api-go/db/models" // Import package model untuk akses struktur User dari database
@@ -16,18 +16,18 @@ import (
 // Ambil secret key JWT dari environment variable
 var jwtKey = []byte(os.Getenv("JWT_SECRET"))
 
-// Struct AuthController menyimpan koneksi database
-type AuthController struct {
+// Struct AuthHandler menyimpan koneksi database
+type AuthHandler struct {
 	DB *gorm.DB
 }
 
-// Fungsi constructor untuk membuat instance AuthController dengan koneksi DB
-func NewAuthController(db *gorm.DB) *AuthController {
-	return &AuthController{DB: db}
+// Fungsi constructor untuk membuat instance AuthHandler dengan koneksi DB
+func NewAuthHandler(db *gorm.DB) *AuthHandler {
+	return &AuthHandler{DB: db}
 }
 
 // Fungsi handler untuk login
-func (ctrl *AuthController) Login(c *gin.Context) {
+func (ctrl *AuthHandler) Login(c *gin.Context) {
 	// Struct sementara untuk menerima inputan dari JSON request
 	var input struct {
 		Username string `json:"username"`

@@ -2,8 +2,10 @@ package main
 
 import (
 	"crud-api-go/config"
-	controller "crud-api-go/controllers"
+	handler "crud-api-go/handlers"
+	"crud-api-go/repository"
 	"crud-api-go/routes"
+	service "crud-api-go/services"
 	"log"
 	"os"
 
@@ -34,10 +36,14 @@ func main() {
 		log.Fatal("Gagal untuk koneksi db: ", err)
 	}
 
-	// Buat instance controller dengan menyuntikkan 'db'
-	authController := controller.NewAuthController(db)
-	userController := controller.NewUserController(db)
-	mahasiswaController := controller.NewMahasiswaController(db)
+	// Buat instance Handler dengan menyuntikkan 'db'
+	authHandler := handler.NewAuthHandler(db)
+	userHandler := handler.NewUserHandler(db)
+
+	// Mahasiswa
+	mahasiswaRepo := repository.NewMahasiswaRepository(db)
+	mahasiswaService := service.NewMahasiswaService(mahasiswaRepo)
+	mahasiswaHandler := handler.NewMahasiswaHandler(mahasiswaService)
 
 	// Setup router
 	r := gin.Default()
@@ -47,10 +53,10 @@ func main() {
 		c.String(200, "Selamat datang di CRUD API Mahasiswa GoLang")
 	})
 
-	// Panggil setiap fungsi controller
-	routes.AuthRoutes(r, authController)
-	routes.UserRoutes(r, userController)
-	routes.MahasiswaRoutes(r, mahasiswaController)
+	// Panggil setiap fungsi Handler
+	routes.AuthRoutes(r, authHandler)
+	routes.UserRoutes(r, userHandler)
+	routes.MahasiswaRoutes(r, mahasiswaHandler)
 
 	// Jalankan
 	r.Run(":8081")

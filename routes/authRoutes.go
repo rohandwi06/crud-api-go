@@ -1,13 +1,13 @@
 package routes
 
 import (
-	controller "crud-api-go/controllers"
+	handler "crud-api-go/handlers"
 
 	"github.com/gin-gonic/gin"
 )
 
-func AuthRoutes(r *gin.Engine, ctrl *controller.AuthController) {
-	auth := r.Group("/auth")
+func AuthRoutes(router *gin.Engine, ctrl *handler.AuthHandler) {
+	auth := router.Group("/auth")
 	{
 		auth.POST("/login", ctrl.Login)
 	}

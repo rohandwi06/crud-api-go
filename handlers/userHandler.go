@@ -1,4 +1,4 @@
-package controller
+package handler
 
 import (
 	models "crud-api-go/db/models"
@@ -9,18 +9,18 @@ import (
 	"gorm.io/gorm"
 )
 
-// Membuat struct UserController berisi blueprint koneksi database
-type UserController struct {
+// Membuat struct UserHandler berisi blueprint koneksi database
+type UserHandler struct {
 	DB *gorm.DB
 }
 
-// Assign koneksi database pada struct UserController
-func NewUserController(db *gorm.DB) *UserController {
-	return &UserController{DB: db}
+// Assign koneksi database pada struct UserHandler
+func NewUserHandler(db *gorm.DB) *UserHandler {
+	return &UserHandler{DB: db}
 }
 
 // CREATE USER
-func (ctrl *UserController) CreateUser(c *gin.Context) {
+func (ctrl *UserHandler) CreateUser(c *gin.Context) {
 
 	// Deklarasi variabel sebagai blueprint data user
 	var user models.User
@@ -60,7 +60,7 @@ func (ctrl *UserController) CreateUser(c *gin.Context) {
 }
 
 // READ ALL USER
-func (ctrl *UserController) GetAllUsers(c *gin.Context) {
+func (ctrl *UserHandler) GetAllUsers(c *gin.Context) {
 
 	// Deklarasi variabel dengan blueprint untuk menyimpan banyak data user
 	var users []models.User
@@ -76,7 +76,7 @@ func (ctrl *UserController) GetAllUsers(c *gin.Context) {
 }
 
 // READ USER BY ID
-func (ctrl *UserController) GetUserById(c *gin.Context) {
+func (ctrl *UserHandler) GetUserById(c *gin.Context) {
 
 	// Mengambil ID dari parameter
 	id := c.Param("id")
@@ -98,7 +98,7 @@ func (ctrl *UserController) GetUserById(c *gin.Context) {
 }
 
 // UPDATE USER
-func (ctrl *UserController) UpdateUser(c *gin.Context) {
+func (ctrl *UserHandler) UpdateUser(c *gin.Context) {
 
 	// Ambil id dari parameter
 	id := c.Param("id")
@@ -140,7 +140,7 @@ func (ctrl *UserController) UpdateUser(c *gin.Context) {
 }
 
 // DELETE USER
-func (ctrl *UserController) DeleteUser(c *gin.Context) {
+func (ctrl *UserHandler) DeleteUser(c *gin.Context) {
 	id := c.Param("id")
 	var user models.User
 
